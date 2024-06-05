@@ -554,7 +554,7 @@ The backend further consists of three main modules:
 
         #### users.controller.ts
 
-        ```typescipt
+        ```typescript
         @Controller('users') // Controller decorator specifying the base route for this controller
         export class UsersController {
           constructor(private readonly usersService: UsersService) {} // Constructor injecting the UsersService into the controller
@@ -576,8 +576,9 @@ The backend further consists of three main modules:
         }
         ```
 
-
-Each module follows the same structure, with DTOs, entities, module, service, and controller files organized within their respective folders for better maintainability and organization.
+    > [!TIP]
+    > Each module follows the same structure, with DTOs, entities, module, service,
+    > and controller files organized within their respective folders for better maintainability and organization.
 
 ---
 
