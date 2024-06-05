@@ -187,17 +187,17 @@ The backend further consists of three main modules:
     - Organized into separate folders:
         - **dto**: Contains Data Transfer Objects (DTOs) for creating and updating blogs (`create-blog.dto.ts` and `update-blog.dto.ts`).
 
-        #### create-blog.dto.ts
-       
-        ```typescript
-        // DTO for creating a new blog
-        export class CreateBlogDto {
-            title: string            // Title of the blog
-            description: string      // Description of the blog
-            tag: string              // Tag associated with the blog
-            username: string         // Username of the blog author
-        }
-        ```
+            #### create-blog.dto.ts
+           
+            ```typescript
+            // DTO for creating a new blog
+            export class CreateBlogDto {
+                title: string            // Title of the blog
+                description: string      // Description of the blog
+                tag: string              // Tag associated with the blog
+                username: string         // Username of the blog author
+            }
+            ```
         
     - **entities**: Contains database entities related to blogs (`blog.entity.ts`).
     - **blogs.module.ts**: Module file where the blogs-related components are registered.
