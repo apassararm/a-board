@@ -588,12 +588,49 @@ The backend further consists of three main modules:
 ## Database Design
 The database consists of three main tables:
 
-1. **Blogs Table**:
-    - Stores information about each blog post, such as title, content, author ID, and creation date.
-2. **Comments Table**:
-    - Holds comments associated with each blog post, including the commenter's name, email, comment content, and timestamp.
-3. **Users Table**:
-    - Contains user data, including username, email, password (hashed), and any additional profile information.
+1. **Blogs Table** :
+
+    - Stores information about each blog post, such as title, description, author username and timestamp.
+
+
+    | Field         | Description                            |
+    |---------------|----------------------------------------|
+    | id            | Unique identifier for the blog post.   |
+    | title         | Title of the blog post.                |
+    | description   | Description of the blog post.          |
+    | username      | Username of the author of the blog post. |
+    | createdAt     | Date and time when the blog post was created. |
+    | updatedAt     | Date and time when the blog post was last updated. |
+   
+
+3. **Comments Table** :
+
+    - Holds comments associated with each blog post, including the comment's ID, blog's ID, commenter's username, comment content and timestamp.
+
+  
+    | Field         | Description                            |
+    |---------------|----------------------------------------|
+    | id            | Unique identifier for the comment.     |
+    | blogId        | ID of the blog post associated with the comment. |
+    | username      | Name of the commenter.                 |
+    | content       | Content of the comment.                |
+    | createdAt     | Date and time when the comment was created. |
+    | updatedAt     | Date and time when the comment was last updated. |
+   
+
+5. **Users Table** :
+
+    - Contains user data, including username, username's ID and timestamp.
+
+
+    | Field         | Description                            |
+    |---------------|----------------------------------------|
+    | id            | Unique identifier for the username.    |
+    | username      | Content of username.                   |
+    | createdAt     | Date and time when the username was created. |
+    | updatedAt     | Date and time when the username was last updated. |
+
+---
 
 ## API Endpoints
 The backend exposes RESTful API endpoints for performing CRUD operations on blogs, comments, and users.
