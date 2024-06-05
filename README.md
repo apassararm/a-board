@@ -199,9 +199,113 @@ The backend further consists of three main modules:
             }
             ```
         
-    - **entities**: Contains database entities related to blogs (`blog.entity.ts`).
+        - **entities**: Contains database entities related to blogs (`blog.entity.ts`).
+   
+            #### blog.entity.ts
+      
+            ```typescript
+            import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+            
+            @Entity() // Defines that this class represents a database entity
+            export class Blog {
+                @PrimaryGeneratedColumn("uuid") // Generates a unique identifier for each blog entry
+                id: string;
+            
+                @Column() // Defines a database column for the title field
+                title: string;
+                
+                @Column("varchar", { length: 4000 }) // Defines a database column for the description field with a maximum length of 4000 characters
+                description: string;
+                
+                @Column() // Defines a database column for the tag field
+                tag: string;
+                
+                @Column() // Defines a database column for the username field
+                username: string;
+                
+                @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) // Automatically sets the createdDate field to the current timestamp when a new entry is created
+                createdDate: Date;
+                
+                @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) // Automatically updates the updatedDate field to the current timestamp whenever the entry is updated
+                updatedDate: Date;
+            }
+            ```
+      
     - **blogs.module.ts**: Module file where the blogs-related components are registered.
+  
+        #### blogs.module.ts
+
+        ```typescript
+        import { Module } from '@nestjs/common'; // Importing the Module decorator from the Nest.js framework
+        import { TypeOrmModule } from '@nestjs/typeorm'; // Importing the TypeOrmModule to integrate TypeORM with Nest.js
+        import { BlogsService } from './blogs.service'; // Importing the BlogsService class from the blogs.service file
+        import { BlogsController } from './blogs.controller'; // Importing the BlogsController class from the blogs.controller file
+        import { Blog } from './entities/blog.entity'; // Importing the Blog entity from the entities folder
+        
+        @Module({
+          imports: [TypeOrmModule.forFeature([Blog])], // Importing the TypeOrmModule and registering the Blog entity to make it available within the module
+          controllers: [BlogsController], // Registering the BlogsController as a controller within the module
+          providers: [BlogsService], // Registering the BlogsService as a provider within the module
+        })
+        export class BlogsModule {} // Defining the BlogsModule class as a module within the Nest.js application
+        ```
+
     - **blogs.service.ts**: Service file containing business logic for blogs.
+  
+        #### blogs.module.ts
+
+        ```typescript
+        import { Injectable } from '@nestjs/common'; // Importing the Injectable decorator from the Nest.js framework
+        import { InjectRepository } from '@nestjs/typeorm'; // Importing the InjectRepository decorator from the Nest.js TypeORM module
+        import { Repository, Like } from 'typeorm'; // Importing the Repository and Like classes from TypeORM
+        import { Blog } from './entities/blog.entity'; // Importing the Blog entity from the entities folder
+        import { CreateBlogDto } from './dto/create-blog.dto'; // Importing the CreateBlogDto from the dto folder
+        import { UpdateBlogDto } from './dto/update-blog.dto'; // Importing the UpdateBlogDto from the dto folder
+        
+        @Injectable() // Decorator that marks a class as a provider
+        export class BlogsService {
+        
+          constructor(
+            @InjectRepository(Blog)
+            private blogRepository: Repository<Blog>, // Injecting the Blog repository into the service
+          ) {}
+        
+        
+          // Method to create a new blog entry
+          async create(createBlogDto: CreateBlogDto) {
+            const blog = await this.blogRepository.create(createBlogDto); // Creating a new blog entity instance based on the provided DTO
+            const createBlog = await this.blogRepository.insert(blog); // Inserting the new blog entity into the database
+            return createBlog; // Returning the created blog
+          }
+        
+          // Method to fetch all blog entries
+          findAll() {
+            return this.blogRepository.find(); // Retrieving all blog entries from the database
+          }
+        
+          // Method to fetch a single blog entry by its ID
+          findOne(id: string) {
+            return this.blogRepository.findOne(id); // Retrieving a blog entry by its ID from the database
+          }
+        
+          // Method to update an existing blog entry
+          async update(id: string, updateBlogDto: UpdateBlogDto) {
+            let blog = await this.blogRepository.findOne(id); // Retrieving the blog entry to be updated from the database
+            blog = { ...blog, ...updateBlogDto }; // Merging the existing blog data with the updated data from the DTO
+            const updateBlog = await this.blogRepository.save(blog); // Saving the updated blog entry to the database
+            return updateBlog; // Returning the updated blog
+          }
+        
+          // Method to delete a blog entry by its ID
+          async remove(id: string) {
+            const deleteBlog = await this.blogRepository.delete(id); // Deleting a blog entry by its ID from the database
+            return deleteBlog; // Returning the result of the deletion operation
+          }
+        
+          // Additional methods for search and filtering can be added here
+        }
+        ```
+        
     - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
     
 <div id="comments-module"></div>
