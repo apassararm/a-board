@@ -22,6 +22,7 @@ The application follows a client-server architecture, with `Next.js` handling th
 ### Frontend (Next.js)
 
 <div id="pages"></div>
+
 - **Pages** : Different pages for :
     - `Homepage` : Show all blogs from the community.
         - Displaying blogs (titles, desctiptions, authors and categories).
