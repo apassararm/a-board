@@ -590,7 +590,7 @@ The database consists of three main tables:
 
 1. **Blogs Table** :
 
-    - Stores information about each blog post, such as title, description, author username and timestamp.
+    - Stores information about each blog post, such as title, description, category, author username and timestamp.
 
 
     | Field         | Description                            |
@@ -598,6 +598,7 @@ The database consists of three main tables:
     | id            | Unique identifier for the blog post.   |
     | title         | Title of the blog post.                |
     | description   | Description of the blog post.          |
+    | tag           | Category of the blog post.          |
     | username      | Username of the author of the blog post. |
     | createdAt     | Date and time when the blog post was created. |
     | updatedAt     | Date and time when the blog post was last updated. |
@@ -613,7 +614,7 @@ The database consists of three main tables:
     | id            | Unique identifier for the comment.     |
     | blogId        | ID of the blog post associated with the comment. |
     | username      | Name of the commenter.                 |
-    | content       | Content of the comment.                |
+    | comment       | Content of the comment.                |
     | createdAt     | Date and time when the comment was created. |
     | updatedAt     | Date and time when the comment was last updated. |
    
@@ -630,15 +631,63 @@ The database consists of three main tables:
     | createdAt     | Date and time when the username was created. |
     | updatedAt     | Date and time when the username was last updated. |
 
+
+> [!NOTE]
+> Tables are automatically created by NestJS, eliminating the need for manual table creation in PHPMyAdmin.
+
+
 ---
 
 ## API Endpoints
-The backend exposes RESTful API endpoints for performing CRUD operations on blogs, comments, and users.
 
-- `/api/blogs`: CRUD operations for blogs.
-- `/api/comments`: CRUD operations for comments.
-- `/api/users`: CRUD operations for users.
+The backend exposes RESTful API endpoints for performing CRUD operations on blogs, comments and users.
 
+### Blogs
+
+- `GET /api/blogs` : Retrieves a list of all blogs.
+- `GET /api/blogs/{id}` : Retrieves a specific blog by its ID.
+- `POST /api/blogs` : Creates a new blog.
+- `PUT /api/blogs/{id}` : Updates an existing blog.
+- `DELETE /api/blogs/{id}` : Deletes a blog by its ID.
+
+### Comments
+
+- `GET /api/comments` : Retrieves a list of all comments.
+- `GET /api/comments/{id}` : Retrieves a specific comment by its ID.
+- `POST /api/comments`: Creates a new comment.
+- `PUT /api/comments/{id}` : Updates an existing comment.
+- `DELETE /api/comments/{id}` : Deletes a comment by its ID.
+
+### Users
+
+- `GET /api/users`: Retrieves a list of all users.
+- `GET /api/users/{id}`: Retrieves a specific user by its ID.
+- `POST /api/users`: Creates a new user.
+- `PUT /api/users/{id}`: Updates an existing user.
+- `DELETE /api/users/{id}`: Deletes a user by its ID.
+
+#### Request and Response Formats
+
+All endpoints accept and return data in `JSON format`.
+
+#### Authentication
+
+Authentication may be required for certain endpoints, depending on the permissions set for users. Make sure to include authentication tokens in the request headers where necessary.
+
+#### Error Handling
+
+In case of errors, appropriate HTTP status codes will be returned along with error messages in the response body.
+
+#### Example Usage
+
+Here's an example of how to create a new blog using cURL:
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"title":"New Blog","description":"This is the description of the new blog.","username": "your-username","tag": "History"}' \
+  http://your-api-domain.com/api/blogs <-- http://localhost:5000/blogs -->
+```
 
 
 ## Installation
@@ -792,7 +841,6 @@ npm run start:prod
 ```
 
 
-
 ## Scripts
 
 The following scripts are defined in the `package.json` files :
@@ -820,16 +868,55 @@ The following scripts are defined in the `package.json` files :
 The project has the following dependencies :
 
 ### Frontend Dependencies
-- **`axios`** : ^1.7.2
-- **`next`** : 14.2.3
-- **`react`** : ^18
-- **`react-dom`** : ^18
+- **[axios](https://www.npmjs.com/package/axios)** :
+    - Axios is a promise-based HTTP client for the browser and Node.js.
+    - It provides an easy-to-use interface for making HTTP requests, handling responses, and managing request and response interceptors.
+
+- **[next](https://www.npmjs.com/package/next)** :
+    - Next.js is a React framework for building server-rendered applications and static websites.
+    - It provides features such as automatic code splitting, route pre-fetching, and built-in support for CSS and CSS-in-JS libraries.
+
+- **[react](https://www.npmjs.com/package/react)** :
+    - React is a JavaScript library for building user interfaces.
+    - It allows the user to create reusable UI components and manage the state of application using a declarative syntax.
+
+- **[react-dom](https://www.npmjs.com/package/react-dom)** :
+    - React DOM is the package responsible for rendering React components into the DOM (Document Object Model).
+    - It provides methods for mounting and unmounting React components, as well as updating the DOM in response to changes in component state or props.
+
 
 ### Backend Dependencies
-- **`@nestjs/common`** : ^10.0.0
-- **`@nestjs/core`** : ^10.0.0
-- **`@nestjs/mapped-types`** : *
-- **`@nestjs/platform-express`** : ^10.0.0
-- **`@nestjs/typeorm`** : ^10.0.2
-- **`mysql2`** : ^3.10.0
-- **`typeorm`** : ^0.3.20
+## Dependencies
+
+- **[@nestjs/common](https://www.npmjs.com/package/@nestjs/common)** :
+    - The common module provides a set of utilities and services widely used across the framework,
+      including decorators, pipes, exception filters, and HTTP utilities.
+
+- **[@nestjs/core](https://www.npmjs.com/package/@nestjs/core)** :
+    - The core module is the heart of the Nest framework, providing the application instance,
+      dependency injection container, and application lifecycle management.
+
+- **[@nestjs/mapped-types](https://www.npmjs.com/package/@nestjs/mapped-types)** :
+    - Mapped Types is a library for NestJS that allows you to create new types based on existing ones.
+    - It simplifies the creation of types by mapping the properties of one type to another.
+
+- **[@nestjs/platform-express](https://www.npmjs.com/package/@nestjs/platform-express)** :
+    - This package integrates the Express framework with NestJS, allowing you to create web servers and RESTful APIs using Express as the underlying HTTP server.
+
+- **[@nestjs/typeorm](https://www.npmjs.com/package/@nestjs/typeorm)** :
+    - NestJS integration with TypeORM, an ORM for TypeScript and JavaScript that works with databases like MySQL, PostgreSQL, and SQLite.
+    - It simplifies database operations and provides a powerful query builder.
+
+- **[mysql2](https://www.npmjs.com/package/mysql2)** :
+    - mysql2 is a fast MySQL client for Node.js, providing low-level MySQL protocol access.
+    - It's used to interact with MySQL databases, allowing you to execute queries and manage database connections..
+
+- **[typeorm](https://www.npmjs.com/package/typeorm)** :
+    - TypeORM is an ORM for TypeScript and JavaScript that supports various databases,
+      including MySQL, PostgreSQL, and SQLite. It simplifies database operations and provides a powerful query builder.
+
+
+
+
+
+
