@@ -301,12 +301,56 @@ The backend further consists of three main modules:
             const deleteBlog = await this.blogRepository.delete(id); // Deleting a blog entry by its ID from the database
             return deleteBlog; // Returning the result of the deletion operation
           }
-        
-          // Additional methods for search and filtering can be added here
         }
         ```
         
     - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
+  
+        #### blogs.module.ts
+
+        ```typescript
+        import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'; // Importing decorators and utilities from the Nest.js framework
+        import { BlogsService } from './blogs.service'; // Importing the BlogsService class from the blogs.service file
+        import { CreateBlogDto } from './dto/create-blog.dto'; // Importing the CreateBlogDto from the dto folder
+        import { UpdateBlogDto } from './dto/update-blog.dto'; // Importing the UpdateBlogDto from the dto folder
+        import { Blog } from './entities/blog.entity'; // Importing the Blog entity from the entities folder
+        
+        @Controller('blogs') // Decorator that marks the class as a controller and specifies the base route
+        export class BlogsController {
+          constructor(private readonly blogsService: BlogsService) { } // Constructor injecting the BlogsService into the controller
+        
+          @Post() // Decorator that marks the method as a POST endpoint
+          create(@Body() createBlogDto: CreateBlogDto) { // Method to handle creation of a new blog
+            return this.blogsService.create(createBlogDto); // Calling the create method of the BlogsService with the provided DTO
+          }
+        
+          @Get() // Decorator that marks the method as a GET endpoint
+          findAll() { // Method to handle fetching all blog entries
+            return this.blogsService.findAll(); // Calling the findAll method of the BlogsService
+          }
+        
+          @Get(':id') // Decorator that marks the method as a GET endpoint with a dynamic route parameter
+          findOne(@Param('id') id: string) { // Method to handle fetching a single blog entry by ID
+            return this.blogsService.findOne(id); // Calling the findOne method of the BlogsService with the provided ID
+          }
+        
+          @Patch(':id') // Decorator that marks the method as a PATCH endpoint with a dynamic route parameter
+          update(@Param('id') id: string, @Body() updateBlogDto: UpdateBlogDto) { // Method to handle updating an existing blog entry
+            return this.blogsService.update(id, updateBlogDto); // Calling the update method of the BlogsService with the provided ID and DTO
+          }
+        
+          @Delete(':id') // Decorator that marks the method as a DELETE endpoint with a dynamic route parameter
+          remove(@Param('id') id: string) { // Method to handle deleting a blog entry by ID
+            return this.blogsService.remove(id); // Calling the remove method of the BlogsService with the provided ID
+          }
+        
+        }
+        ```
+
+---
+
+> [!NOTE]
+> For `Comments Module` and `Users Module`, include similar breakdown as the Blogs Module
     
 <div id="comments-module"></div>
 
