@@ -5,6 +5,8 @@ This project consists of a frontend built with Next.js and a backend built with 
 ## Table of Contents
 
 - [Application Architecture](#application-architecture)
+    - [Frontend (Next.js)](#frontend-nextjs)
+    - [Backend (NestJS)](#backend-nestjs)
 - [Installation](#installation)
 - [Setting Up Database](#setting-up-database)
 - [Running the Project](#running-the-project)
@@ -155,12 +157,33 @@ The application follows a client-server architecture, with `Next.js` handling th
 
 
 
-
 ### Backend (NestJS)
-- **Controllers**: Handle incoming requests from the frontend and delegate business logic to services.
-- **Services**: Implement business logic, such as CRUD operations on blogs, comments, and users.
-- **Modules**: Organize related components and services into separate modules for better maintainability.
-- **Database Interaction**: Use database models and repositories to interact with the database.
+
+In the backend, the project structure is organized as follows:
+
+- **main.ts**: Entry point of the application.
+- **app.module.ts**: Main module of the application, where modules, controllers, and providers are registered.
+- **app.service.ts**: Main service of the application, responsible for providing common functionalities across modules.
+- **app.controller.ts**: Main controller of the application, responsible for handling incoming HTTP requests.
+
+The backend further consists of three main modules:
+
+1. **Blogs Module**:
+   - Contains functionality related to blogs.
+   - Organized into separate folders:
+     - **dto**: Contains Data Transfer Objects (DTOs) for creating and updating blogs (`create-blog.dto.ts` and `update-blog.dto.ts`).
+     - **entities**: Contains database entities related to blogs (`blog.entity.ts`).
+     - **blogs.module.ts**: Module file where the blogs-related components are registered.
+     - **blogs.service.ts**: Service file containing business logic for blogs.
+     - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
+
+2. **Comments Module**:
+   - Contains functionality related to comments. (Include similar breakdown as the Blogs Module)
+
+3. **Users Module**:
+   - Contains functionality related to users. (Include similar breakdown as the Blogs Module)
+
+Each module follows the same structure, with DTOs, entities, module, service, and controller files organized within their respective folders for better maintainability and organization.
 
 ## Database Design
 The database consists of three main tables:
