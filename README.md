@@ -6,7 +6,9 @@ This project consists of a frontend built with Next.js and a backend built with 
 
 - [Project Structure](#project-structure)
 - [Installation](#installation)
-- [Running the Project](#running-the-project)
+- [Running the Frontend](#running-the-frontend)
+- [Setting Up Database](#setting-up-database)
+- [Running the Backend](#running-the-backend)
 - [Scripts](#scripts)
 - [Frontend](#frontend)
 - [Backend](#backend)
@@ -18,22 +20,7 @@ This project consists of a frontend built with Next.js and a backend built with 
 
 The project is structured as follows:
 
-a-board-project/
-│
-├── frontend/ # Next.js frontend
-│ ├── pages/
-│ ├── public/
-│ ├── styles/
-│ ├── .gitignore
-│ ├── package.json
-│ └── README.md
-│
-└── backend/ # NestJS backend
-├── src/
-├── test/
-├── .gitignore
-├── package.json
-└── README.md
+
 
 
 
@@ -48,3 +35,15 @@ Navigate to the `frontend` directory and install dependencies:
 ```sh
 cd frontend
 npm install
+```
+
+### Backend
+
+Navigate to the `backend` directory and install dependencies:
+
+```sh
+cd backend
+npm install
+```
+
+
