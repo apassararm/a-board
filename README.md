@@ -180,7 +180,7 @@ In the backend, the project structure is organized as follows:
 
 The backend further consists of three main modules:
 
-<div id="blogs-modules"></div>
+<div id="blogs-module"></div>
 
 1. **Blogs Module**:
    - Contains functionality related to blogs.
@@ -191,12 +191,12 @@ The backend further consists of three main modules:
      - **blogs.service.ts**: Service file containing business logic for blogs.
      - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
     
-<div id="comments-modules"></div>
+<div id="comments-module"></div>
 
 2. **Comments Module**:
    - Contains functionality related to comments. (Include similar breakdown as the Blogs Module)
 
-<div id="users-modules"></div>
+<div id="users-module"></div>
 
 3. **Users Module**:
    - Contains functionality related to users. (Include similar breakdown as the Blogs Module)
