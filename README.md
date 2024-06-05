@@ -162,7 +162,7 @@ The application follows a client-server architecture, with `Next.js` handling th
       return response.data;
     };
 
-
+---
 
 ### Backend (NestJS)
 
