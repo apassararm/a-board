@@ -12,8 +12,7 @@ This project consists of a frontend built with Next.js and a backend built with 
 - [Frontend](#frontend)
 - [Backend](#backend)
 - [Dependencies](#dependencies)
-- [Dev Dependencies](#dev-dependencies)
-- [License](#license)
+
 
 ## Project Structure
 
@@ -175,3 +174,43 @@ npm run start:prod
 
 
 
+## Scripts
+
+The following scripts are defined in the `package.json` files :
+
+### Frontend Scripts
+- **`dev`** : Starts the development server.
+- **`build`** : Builds the project for production.
+- **`start`** : Starts the production server.
+
+### Backend Scripts
+- **`build`** : Builds the project.
+- **`start`** : Starts the application.
+- **`start:dev`** : Starts the application in development mode with file watching.
+- **`start:debug`** : Starts the application in debug mode with file watching.
+- **`start:prod`** : Starts the application in production mode.
+- **`test`** : Runs the tests.
+- **`test:watch`** : Runs the tests in watch mode.
+- **`test:cov`** : Runs the tests and generates coverage reports.
+- **`test:debug`** : Runs the tests in debug mode.
+- **`test:e2e`** : Runs the end-to-end tests.
+
+
+## Dependencies
+
+The project has the following dependencies :
+
+### Frontend Dependencies
+- **`axios`** : ^1.7.2
+- **`next`** : 14.2.3
+- **`react`** : ^18
+- **`react-dom`** : ^18
+
+### Backend Dependencies
+- **`@nestjs/common`** : ^10.0.0
+- **`@nestjs/core`** : ^10.0.0
+- **`@nestjs/mapped-types`** : *
+- **`@nestjs/platform-express`** : ^10.0.0
+- **`@nestjs/typeorm`** : ^10.0.2
+- **`mysql2`** : ^3.10.0
+- **`typeorm`** : ^0.3.20
