@@ -7,6 +7,8 @@ This project consists of a frontend built with Next.js and a backend built with 
 - [Application Architecture](#application-architecture)
     - [Frontend (Next.js)](#frontend-nextjs)
         - [Pages](#pages)
+        - [Components](#components)
+        - [API Routes](#api-routes)
     - [Backend (NestJS)](#backend-nestjs)
 - [Installation](#installation)
 - [Setting Up Database](#setting-up-database)
@@ -53,6 +55,7 @@ The application follows a client-server architecture, with `Next.js` handling th
 > `All pages` :
 > - Automatic sign-out after `5 minutes` of user inactivity (session timeout).
 
+<div id="components"></div>
 
 - **Components** : Reusable UI components for consistent design and functionality.
     - `Modal Component` :
@@ -70,6 +73,7 @@ The application follows a client-server architecture, with `Next.js` handling th
         - Which checks the user's sign-in status. If the user is signed in,
           it displays the `Sign out` button; otherwise, it displays the `Sign in` button.
 
+<div id="api-routes"></div>
 
 - **API Routes** : Communicate with the backend API to fetch and manipulate data.
 
