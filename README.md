@@ -252,7 +252,7 @@ The backend further consists of three main modules:
 
     - **blogs.service.ts**: Service file containing business logic for blogs.
   
-        #### blogs.module.ts
+        #### blogs.service.ts
 
         ```typescript
         import { Injectable } from '@nestjs/common'; // Importing the Injectable decorator from the Nest.js framework
@@ -306,7 +306,7 @@ The backend further consists of three main modules:
         
     - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
   
-        #### blogs.module.ts
+        #### blogs.conroller.ts
 
         ```typescript
         import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common'; // Importing decorators and utilities from the Nest.js framework
@@ -355,12 +355,227 @@ The backend further consists of three main modules:
 <div id="comments-module"></div>
 
 2. **Comments Module**:
-   - Contains functionality related to comments. (Include similar breakdown as the Blogs Module)
+   - Contains functionality related to comments.
+  
+        #### create-comment.dto.ts
+
+        ```typescript
+        export class CreateCommentDto {
+            blogId: string; // ID of the blog the comment belongs to
+            comment: string; // Content of the comment
+            username: string; // Username of the commenter
+        }
+        ```
+
+
+        #### comment.entity.ts
+     
+        ```typescript
+        @Entity() // Defines that this class represents a database entity
+        export class Comment {
+            @PrimaryGeneratedColumn("uuid") // Generates a unique identifier for each comment
+            id: string;
+        
+            @Column() // Defines a database column for the blogId field
+            blogId: string;
+        
+            @Column("varchar", { length: 4000 }) // Defines a database column for the comment field with a maximum length of 4000 characters
+            comment: string;
+        
+            @Column() // Defines a database column for the username field
+            username: string;
+        
+            @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) // Automatically sets the createdDate field to the current timestamp when a new comment is created
+            createdDate: Date;
+        
+            @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) // Automatically updates the updatedDate field to the current timestamp whenever the comment is updated
+            updatedDate: Date;
+        }
+        ```
+
+        #### comments.module.ts
+
+        ```typescript
+        @Module({
+          imports: [TypeOrmModule.forFeature([Comment])],
+          controllers: [CommentsController],
+          providers: [CommentsService],
+        })
+        export class CommentsModule {}
+        ```
+
+        #### comments.service.ts
+
+        ```typescript
+        export class CommentsService {
+          constructor(
+            @InjectRepository(Comment)
+            private commentRepository: Repository<Comment>, // Injecting the Comment repository into the service
+          ) {}
+        
+          // Method to create a new comment entry
+          async create(createCommentDto: CreateCommentDto) {
+            const comment = await this.commentRepository.create(createCommentDto); // Creating a new comment entity instance based on the provided DTO
+            const createComment = await this.commentRepository.insert(comment); // Inserting the new comment entity into the database
+            return createComment; // Returning the created comment
+          }
+        
+          // Method to fetch a single comment entry by its ID
+          findOne(id: string) {
+            return this.commentRepository.findOne(id); // Retrieving a comment entry by its ID from the database
+          }
+        
+          // Method to fetch all comments associated with a specific blog by its ID
+          async findByBlogId(blogId: string) {
+            return await this.commentRepository.find({ where: { blogId } }); // Retrieving comments associated with a specific blog ID from the database
+          }
+        
+          // Method to update an existing comment entry
+          async update(id: string, updateCommentDto: UpdateCommentDto) {
+            let comment = await this.commentRepository.findOne(id); // Retrieving the comment entry to be updated from the database
+            comment = { ...comment, ...updateCommentDto }; // Merging the existing comment data with the updated data from the DTO
+            const updateComment = await this.commentRepository.save(comment); // Saving the updated comment entry to the database
+            return updateComment; // Returning the updated comment
+          }
+        }
+        ```
+
+        #### comments.controller.ts
+
+        ```typescript
+        @Controller('comments') // Controller decorator specifying the base route for this controller
+        export class CommentsController {
+          constructor(private readonly commentsService: CommentsService) {} // Constructor injecting the CommentsService into the controller
+        
+          @Post() // HTTP POST route handler for creating a new comment
+          create(@Body() createCommentDto: CreateCommentDto) {
+            return this.commentsService.create(createCommentDto); // Calling the create method of the CommentsService to create a new comment
+          }
+        
+          @Get('blog/:blogId') // HTTP GET route handler for fetching comments associated with a specific blog by its ID
+          async findByBlogId(@Param('blogId') blogId: string) {
+            const comments = await this.commentsService.findByBlogId(blogId); // Calling the findByBlogId method of the CommentsService to fetch comments associated with a specific blog ID
+            // if (!comments || comments.length === 0) { // Optional: Check if comments are found, throw a NotFoundException if not found
+            //   throw new NotFoundException(`Comments for blog with ID '${blogId}' not found`);
+            // }
+            return comments; // Returning the fetched comments
+          }
+        
+          @Patch(':id') // HTTP PATCH route handler for updating a comment by its ID
+          update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {
+            return this.commentsService.update(id, updateCommentDto); // Calling the update method of the CommentsService to update a comment by its ID
+          }
+        
+          @Delete(':id') // HTTP DELETE route handler for deleting a comment by its ID
+          remove(@Param('id') id: string) {
+            return this.commentsService.remove(id); // Calling the remove method of the CommentsService to delete a comment by its ID
+          }
+        }
+        ```
+
 
 <div id="users-module"></div>
 
 3. **Users Module**:
-   - Contains functionality related to users. (Include similar breakdown as the Blogs Module)
+   - Contains functionality related to users.
+  
+        ##### create-user.dto.ts
+
+        ```typescript
+        export class CreateUserDto {
+            username: string
+        }
+        ```
+
+        #### user.entity.ts
+        ```typescript
+        @Entity()
+        export class User {
+          @PrimaryGeneratedColumn("uuid")
+          id: string;
+        
+          @Column()
+          username: string;
+        
+          @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+          createdDate: Date;
+        
+          @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+          updatedDate: Date;
+        }
+        ```
+
+        #### users.module.ts
+
+        ```typescript
+        @Module({
+          imports: [TypeOrmModule.forFeature([User])],
+          controllers: [UsersController],
+          providers: [UsersService],
+        })
+        export class UsersModule {}
+        ```
+
+        #### users.service.ts
+
+        ```typescript
+        @Injectable()
+        export class UsersService {
+        
+          constructor(
+            @InjectRepository(User)
+            private userRepository: Repository<User>,
+          ) {}
+        
+          async create(createUserDto: CreateUserDto) {
+            const user = await this.userRepository.create(createUserDto);
+            const createUser = await this.userRepository.insert(user);
+            return createUser;
+          }
+        
+          findAll() {
+            return this.userRepository.find();
+          }
+        
+          findOne(id: string) {
+            return this.userRepository.findOne(id);
+          }
+        
+          update(id: string, updateUserDto: UpdateUserDto) {
+            return `This action updates a #${id} user`;
+          }
+        
+          remove(id: string) {
+            return `This action removes a #${id} user`;
+          }
+        }
+        ```
+
+
+        #### users.controller.ts
+
+        ```typesctipt
+        @Controller('users') // Controller decorator specifying the base route for this controller
+        export class UsersController {
+          constructor(private readonly usersService: UsersService) {} // Constructor injecting the UsersService into the controller
+        
+          @Post() // HTTP POST route handler for creating a new user
+          create(@Body() createUserDto: CreateUserDto) {
+            return this.usersService.create(createUserDto); // Calling the create method of the UsersService to create a new user
+          }
+        
+          @Get() // HTTP GET route handler for fetching all users
+          findAll() {
+            return this.usersService.findAll(); // Calling the findAll method of the UsersService to fetch all users
+          }
+        
+          @Get(':id') // HTTP GET route handler for fetching a single user by its ID
+          findOne(@Param('id') id: string) {
+            return this.usersService.findOne(id); // Calling the findOne method of the UsersService to fetch a single user by its ID
+          }
+        }
+        ```
+
 
 Each module follows the same structure, with DTOs, entities, module, service, and controller files organized within their respective folders for better maintainability and organization.
 
