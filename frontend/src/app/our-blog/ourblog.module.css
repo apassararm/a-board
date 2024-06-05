@@ -1,0 +1,457 @@
+.section {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  height: 100vh;
+}
+
+.container {
+  min-width: 798px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.divSearch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 40px;
+  padding-right: 321px;
+  gap: 8px;
+}
+
+.searchContainer {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
+.searchInput {
+  position: relative;
+  width: 100%;
+  border: 1px solid var(--green-100);
+  outline: none;
+  background-color: var(--grey-100);
+  padding: 8px 14px;
+  padding-left: 42px;
+  color: var(--text-dp);
+  font-size: 16px;
+  border-radius: 8px;
+}
+
+.searchBtn {
+  position: absolute;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+}
+
+.customSelectContainer {
+  position: relative;
+  display: inline-block;
+  /* margin: 20px; */
+}
+
+.selectBtn {
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* width: 200px; */
+}
+
+.selectBtn span {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.selectDropdown {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  display: block;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0;
+  list-style: none;
+  width: 200px;
+}
+
+.selectDropdown .option {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.selectDropdown .option:hover,
+.selectDropdown .option.selected {
+  background-color: var(--green-100);
+}
+
+.selectDropdown .option.selected::after {
+  content: '✓';
+  
+  float: right;
+}
+
+
+.btnContainer {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.createBtn {
+  background-color: var(--success);
+  padding: 10px 29px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.createBtn:hover {
+  background-color: #329b51;
+}
+
+
+.blogContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 40px 35px 40px;
+  padding-right: 321px;
+}
+
+.blogCard {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 0.5px solid var(--grey-100);
+  padding: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.blogCard:first-of-type {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.blogCard:last-of-type {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.blogAction {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.blogUser {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.blogUser label {
+  font-size: 14px;
+  color: var(--grey-300);
+}
+
+.blogTag {
+  width: fit-content;
+  height: 24px;
+  padding: 4px 8px;
+  background-color: var(--tag-bg);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+}
+
+.blogTag label {
+  color: var(--tag-text);
+  font-size: 12px;
+}
+
+.blogDetail {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  gap: 2px;
+}
+
+.blogDetail h1 {
+  font-size: 16px;
+  color: var(--text-dp);
+}
+
+.blogDetail p {
+  font-size: 12px;
+  color: var(--text-dp);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 1234px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 30px;
+}
+
+.blogComment {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.blogComment label {
+  font-size: 12px;
+  color: var(--grey-300);
+}
+
+
+
+@media screen and (max-width: 1440px) {
+
+  .divSearch,
+  .blogContainer {
+    padding-right: calc(20% - 30px);
+  }
+
+}
+
+@media screen and (max-width: 1225px) {
+  .divSearch {
+    justify-content: flex-start;
+    padding-right: 50px;
+    width: calc(100% - 10px);
+    gap: 10px;
+  }
+
+  .blogContainer {
+    padding-right: 50px;
+    width: calc(100% - 10px);
+  }
+
+  .searchContainer {
+    width: 70%;
+  }
+
+  .customSelectContainer,
+  .btnContainer {
+    width: 15%;
+  }
+
+  .selectBtn {
+    padding: 10px;
+  }
+
+  .createBtn {
+    padding: 10px 20px
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+
+  .container {
+    min-width: none;
+    width: 100%;
+  }
+
+  .divSearch {
+    gap: 10px;
+    padding-right: 50px;
+    width: calc(100% - 10px);
+  }
+
+  .blogContainer {
+    padding-right: 50px;
+    width: calc(100% - 10px);
+  }
+
+  .searchContainer {
+    width: 60%;
+  }
+
+  .customSelectContainer {
+    width: 20%;
+  }
+
+  .btnContainer {
+    width: 20%;
+  }
+}
+
+
+@media screen and (max-width: 970px) {
+
+  .section {
+    width: 100%;
+  }
+
+  .container {
+    min-width: 0px !important;
+    max-width: 970px;
+    width: 100%;
+  }
+
+  .divSearch,
+  .blogContainer {
+    padding-right: 30px;
+    width: calc(100% - 30px);
+  }
+
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+  .container {
+    padding: 40px;
+    gap: 30px;
+  }
+
+
+  .divSearch,
+  .blogContainer {
+    width: 100%;
+    padding: 0px;
+  }
+
+  .selectBtn {
+    font-size: 14px;
+  }
+
+  .selectBtn span svg {
+    width: 15px;
+    height: 15px;
+  }
+
+
+  .searchContainer {
+    width: 70%;
+  }
+
+  .customSelectContainer {
+    width: 15%;
+  }
+
+  .btnContainer {
+    width: 15%;
+  }
+
+  .createBtn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+
+
+
+}
+
+
+@media screen and (max-width: 700px) {
+
+
+  .searchContainer {
+    width: 60%;
+  }
+
+  .customSelectContainer {
+    width: 20%;
+  }
+
+  .btnContainer {
+    width: 20%;
+  }
+
+
+}
+
+
+@media screen and (max-width: 550px) {
+
+
+  .searchContainer {
+    width: 50%;
+  }
+
+  .customSelectContainer {
+    width: 25%;
+  }
+
+  .btnContainer {
+    width: 25%;
+  }
+
+
+}
+
+
+@media screen and (max-width: 470px) {
+
+
+  .searchContainer {
+    width: 40%;
+  }
+
+  .customSelectContainer {
+    width: 30%;
+  }
+
+  .btnContainer {
+    width: 30%;
+  }
+
+
+}
+
+
+@media screen and (max-width: 425px) {
+
+  .container {
+    padding: 16px;
+    padding-top: 45px;
+    gap: 20px;
+  }
+
+
+  .searchContainer {
+    width: 40%;
+  }
+
+  .customSelectContainer {
+    width: 30%;
+  }
+
+  .btnContainer {
+    width: 30%;
+  }
+
+}
