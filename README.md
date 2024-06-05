@@ -10,12 +10,17 @@ This project consists of a frontend built with Next.js and a backend built with 
         - [Components](#components)
         - [API Routes](#api-routes)
     - [Backend (NestJS)](#backend-nestjs)
+        - [Blogs Module](#blogs-module)
+        - [Comments Module](#comments-module)
+        - [Users Module](#users-module)
 - [Installation](#installation)
 - [Setting Up Database](#setting-up-database)
 - [Running the Project](#running-the-project)
 - [Scripts](#scripts)
 - [Dependencies](#dependencies)
 
+<!-- -->
+<!-- -->
 
 ## Application Architecture
 
@@ -175,6 +180,8 @@ In the backend, the project structure is organized as follows:
 
 The backend further consists of three main modules:
 
+<div id="blogs-modules"></div>
+
 1. **Blogs Module**:
    - Contains functionality related to blogs.
    - Organized into separate folders:
@@ -183,14 +190,20 @@ The backend further consists of three main modules:
      - **blogs.module.ts**: Module file where the blogs-related components are registered.
      - **blogs.service.ts**: Service file containing business logic for blogs.
      - **blog.controller.ts**: Controller file responsible for handling HTTP requests related to blogs.
+    
+<div id="comments-modules"></div>
 
 2. **Comments Module**:
    - Contains functionality related to comments. (Include similar breakdown as the Blogs Module)
+
+<div id="users-modules"></div>
 
 3. **Users Module**:
    - Contains functionality related to users. (Include similar breakdown as the Blogs Module)
 
 Each module follows the same structure, with DTOs, entities, module, service, and controller files organized within their respective folders for better maintainability and organization.
+
+---
 
 ## Database Design
 The database consists of three main tables:
