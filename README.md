@@ -9,8 +9,6 @@ This project consists of a frontend built with Next.js and a backend built with 
 - [Setting Up Database](#setting-up-database)
 - [Running the Project](#running-the-project)
 - [Scripts](#scripts)
-- [Frontend](#frontend)
-- [Backend](#backend)
 - [Dependencies](#dependencies)
 
 
