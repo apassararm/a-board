@@ -18,7 +18,7 @@ This project consists of a frontend built with Next.js and a backend built with 
 
 The project is structured as follows:
 
-a--board-project/
+a-board-project/
 │
 ├── frontend/ # Next.js frontend
 │ ├── pages/
