@@ -579,7 +579,7 @@ The backend further consists of three main modules:
 
 > [!TIP]
 > Each module follows the same structure, with DTOs, entities, module, service,
-> and controller files organized within their respective folders for better maintainability and organization.
+> and controller files organized within their respective folders for `better maintainability and organization`.
 
 ---
 
