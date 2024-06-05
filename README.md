@@ -6,6 +6,7 @@ This project consists of a frontend built with Next.js and a backend built with 
 
 - [Application Architecture](#application-architecture)
     - [Frontend (Next.js)](#frontend-nextjs)
+          - [Pages)](#pages)
     - [Backend (NestJS)](#backend-nestjs)
 - [Installation](#installation)
 - [Setting Up Database](#setting-up-database)
