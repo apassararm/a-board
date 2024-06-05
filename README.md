@@ -73,7 +73,21 @@ npm start
 ## Setting Up Database
 
 > [!WARNING]
-> Before running the backend, you need to set up the database using PHPMyAdmin and XAMPP.
+> Before running the backend, you need to set up the database using `PHPMyAdmin` and `XAMPP`.
+
+
+1.Install XAMPP:
+
+  - Download and install XAMPP from [Download XAMPP](https://www.apachefriends.org/index.html) based on your operating system.
+
+2.Start Apache and MySQL:
+
+  - Start the `Apache` and `MySQL` services from the XAMPP control panel.
+
+3.Access PHPMyAdmin:
+
+   - Open your web browser and navigate to [PHPMyAdmin](http://localhost/phpmyadmin/).
+
 
 
 ## Running the Backend
