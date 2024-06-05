@@ -6,9 +6,8 @@ This project consists of a frontend built with Next.js and a backend built with 
 
 - [Project Structure](#project-structure)
 - [Installation](#installation)
-- [Running the Frontend](#running-the-frontend)
 - [Setting Up Database](#setting-up-database)
-- [Running the Backend](#running-the-backend)
+- [Running the Project](#running-the-project)
 - [Scripts](#scripts)
 - [Frontend](#frontend)
 - [Backend](#backend)
@@ -46,34 +45,10 @@ cd backend
 npm install
 ```
 
-## Running the Frontend
-
-### Frontend
-To run the `frontend` part of the project:
-
-#### Development
-```sh
-cd frontend
-npm run dev
-```
-
-This will start the frontend development server at http://localhost:3000.
-
-Production
-To build the frontend for production:
-
-cd frontend
-npm run build
-
-To start the production server:
-
-cd frontend
-npm start
-
 ## Setting Up Database
 
 > [!WARNING]
-> Before running the backend, you need to set up the database using `PHPMyAdmin` and `XAMPP`.
+> Before running the project, you need to set up the database using `PHPMyAdmin` and `XAMPP`.
 
 
 1. **Install XAMPP**
@@ -120,7 +95,7 @@ npm start
          port: 3306,
          username: 'root',
          password: '',
-         database: 'your_database_name',
+         database: 'your-database-name',
          entities: [Blog, Comment, User],
          synchronize: true,
        }),
@@ -138,25 +113,65 @@ npm start
 > and configuring the backend project to connect to the database.
 
 
+## Running the Project
 
-## Running the Backend
+### Frontend
+
+To run the `frontend` part of the project :
+
+#### Development
+```sh
+cd frontend
+npm run dev
+```
+
+This will start the frontend development server at `http://localhost:3000`.
+
+#### Production
+
+To build the frontend for `production` :
+
+```sh
+cd frontend
+npm run build
+```
+
+To start the `production server` :
+
+```sh
+cd frontend
+npm start
+```
+
 
 ### Backend
-To run the backend part of the project:
 
-Development
+To run the `backend` part of the project :
+
+#### Development
+```sh
 cd backend
 npm run start:dev
+```
 
-This will start the backend development server at http://localhost:3000.
+This will start the backend development server at `http://localhost:5000`.
 
-Production
-To build the backend for production:
+
+#### Production
+
+To build the backend for `production` :
+
+```sh
 cd backend
 npm run build
+```
 
-To start the production server:
+To start the `production server` :
+
+```sh
 cd backend
 npm run start:prod
+```
+
 
 
