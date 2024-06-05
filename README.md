@@ -13,6 +13,8 @@ This project consists of a frontend built with Next.js and a backend built with 
         - [Blogs Module](#blogs-module)
         - [Comments Module](#comments-module)
         - [Users Module](#users-module)
+    - [Database Design](#database-design)
+    - [API Endpoints](#api-endpoints)
 - [Installation](#installation)
 - [Setting Up Database](#setting-up-database)
 - [Running the Project](#running-the-project)
